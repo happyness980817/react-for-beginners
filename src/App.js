@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 function App() {
+  
   const [toDo, setToDo] = useState("");
   const [toDos, setToDos] = useState([]); 
   const onChange = (event) => setToDo(event.target.value);
@@ -12,6 +13,10 @@ function App() {
     setToDo("");
     setToDos((currentArray) => [toDo, ...currentArray]);
   };
+  const deleteBtn = (event) => {
+    const li = event.target.parentElement;
+    li.remove();
+  };
   return (
     <div>
       <h1>My To Dos, number of toDos = {toDos.length}</h1>
@@ -21,9 +26,9 @@ function App() {
       </form>
       <hr />
         <ul>
-          {toDos.map((item, index) => (
-            <li key={index}>{item}</li>
-            ))}
+          {toDos.map((item, index) => (<li key={index}>
+            {item}<button onClick={deleteBtn}>❌</button>
+            </li>))}
         </ul>
     </div>
   );
