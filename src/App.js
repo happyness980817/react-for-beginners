@@ -2,23 +2,34 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [coins, setCoins] = useState([])
+  const [movies, setMovies] = useState([]);
+
+  const getMovies = async () => {
+    const response = await fetch(
+      `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=231083e38b78a31129aa0ad39cf290bd&targetDt=20231212`
+    );
+    const json = await response.json();
+    const movieNames = json.boxOfficeResult.dailyBoxOfficeList.map(movie => movie.movieNm);
+    setMovies(movieNames);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
-    .then((response) => response.json())
-    .then((json) => {
-      setCoins(json);
-      setLoading(false);
-    });
+    getMovies();
   }, []);
+
   return (
-  <div>
-    <h1>The Coins! (number of coins: {coins.length})</h1>
-    {loading ? <strong>Loading...</strong> : null}
-    <ul>
-      {coins.map((coin) => <li>{coin.name} ({coin.symbol}): ${coin.quotes.USD.price.toFixed(2)}USD</li>)}
-    </ul>
-  </div>
+    <div>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <ul>
+          {movies.map((movie, index) => (
+            <li key={index}>{movie}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
