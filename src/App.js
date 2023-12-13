@@ -20,15 +20,11 @@ function App() {
 
   return (
     <div>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
+      <h1>My Movie App</h1>
+      {loading ? (<h1>Loading...</h1>) : (
         <ul>
-          {movies.map((movie, index) => (
-            <li key={index}>{movie}</li>
-          ))}
-        </ul>
-      )}
+          {movies.map((movie, index) => (<li key={index}>{movie}</li>))}
+        </ul>)}
     </div>
   );
 }
