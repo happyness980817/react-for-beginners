@@ -9,8 +9,8 @@ function App() {
       `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=231083e38b78a31129aa0ad39cf290bd&targetDt=20231212`
     );
     const json = await response.json();
-    const movieNames = json.boxOfficeResult.dailyBoxOfficeList.map(movie => movie.movieNm);
-    setMovies(movieNames);
+    const boxOfficeList = json.boxOfficeResult.dailyBoxOfficeList;
+    setMovies(boxOfficeList);
     setLoading(false);
   };
 
@@ -21,10 +21,18 @@ function App() {
   return (
     <div>
       <h1>My Movie App</h1>
-      {loading ? (<h1>Loading...</h1>) : (
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
         <ul>
-          {movies.map((movie, index) => (<li key={index}>{movie}</li>))}
-        </ul>)}
+          {movies.map((movie, index) => (
+            <div key={index}>
+              <h2>{movie.movieNm}</h2>
+              <h3>release date: {movie.openDt}</h3>
+            </div>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
