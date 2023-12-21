@@ -15,7 +15,22 @@ function App() {
     getMovies()
   },[]);
 
-  return <div>{loading ? <h1>Loading...</h1> : <div>{movies.map(movie => <div key={movie.id}>{movie.title}</div>)}</div>}</div>;
+  return (
+  <div>
+    {loading ? <h1>Loading...</h1> : 
+    (<div>
+      {movies.map((movie) => (
+        <div key={movie.id}>
+          <img src={movie.medium_cover_image} />
+          <h2>{movie.title}</h2>
+          <p>{movie.summary}</p>
+          <ul>
+            {movie.genres.map(g => <li key={g}>{g}</li>)} 
+          </ul>
+        </div>))}
+    </div>
+    )}
+  </div>);
 }
-
+// map 사용 시 element 에 key 부여
 export default App;
