@@ -1,5 +1,7 @@
 'use strict';
 
+// State:  pending -> fulfilled or rejected
+
 // 1. Producer
 const promise = new Promise((resolve,reject) => {
     console.log('doing something...');
