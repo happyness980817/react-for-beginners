@@ -9,14 +9,14 @@
     <script type="text/babel"> 
         function Btn({text}) {
             return (<button>{text}</button>);
-        }
+        } // Btn 안의 parameter 가 prop
         function App() {
             return (
             <div>
                 <Btn text="Save Changes"/> 
                 <Btn text="Confirm"/>
             </div>
-        );
+        ); 
     }
         const root = document.getElementById("root");
         ReactDOM.render(<App />,root);
