@@ -12,9 +12,13 @@ function App() {
       <Route Route path="/movie/:id" element={<Detail />}> 
       </Route>
       <Route path="/" element={<Home />}> 
-      </Route>
+      </Route> 
     </Routes>
   </Router>);
-} // :id -> id = parameter
+} // :id -> id = parameter, send user to "/movie/id"
+// Route means link
+// Routes = Switch
+// renders component inside element = {}
+//  
 
 export default App;
